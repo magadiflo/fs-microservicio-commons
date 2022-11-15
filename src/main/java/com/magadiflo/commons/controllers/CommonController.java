@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,14 @@ public class CommonController<E, S extends ICommonService<E>> {
 	@GetMapping
 	public ResponseEntity<?> listar() {
 		return ResponseEntity.ok(this.service.findAll());
+	}
+	
+	// Tenemos que enviar dos parámetros desde el frontend
+	// page: 0, 1, 2....etc (página actual)
+	// size: Tamaño de la paginación. Ejm. 5 por página, 10 por página, etc.
+	@GetMapping(path = "/pagina")
+	public ResponseEntity<?> listar(Pageable pageable) {
+		return ResponseEntity.ok(this.service.findAll(pageable));
 	}
 
 	@GetMapping(path = "/{id}")

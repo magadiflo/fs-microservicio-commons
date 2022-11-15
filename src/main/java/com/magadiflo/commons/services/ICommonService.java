@@ -2,7 +2,13 @@ package com.magadiflo.commons.services;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface ICommonService<E> {
+
+	Page<E> findAll(Pageable pageable);
+
 	Iterable<E> findAll();
 
 	Optional<E> findById(Long id);

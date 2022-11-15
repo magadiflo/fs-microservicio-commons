@@ -2,7 +2,9 @@ package com.magadiflo.commons.services;
 
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -17,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  * que vayamos a inyectar, sino más bien una clase que vamos a heredar
  */
 
-public class CommonServiceImpl<E, R extends CrudRepository<E, Long>> implements ICommonService<E> {
+public class CommonServiceImpl<E, R extends PagingAndSortingRepository<E, Long>> implements ICommonService<E> {
 
 	protected final R repository;
 
@@ -47,6 +49,12 @@ public class CommonServiceImpl<E, R extends CrudRepository<E, Long>> implements 
 	@Transactional
 	public void deleteById(Long id) {
 		this.repository.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<E> findAll(Pageable pageable) {
+		return this.repository.findAll(pageable);
 	}
 
 }
