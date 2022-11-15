@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,7 +63,7 @@ public class CommonController<E, S extends ICommonService<E>> {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> crear(@Validated @RequestBody E entity, BindingResult result) {
+	public ResponseEntity<?> crear(@Valid @RequestBody E entity, BindingResult result) {
 		if(result.hasErrors()) {
 			return this.validar(result);
 		}
