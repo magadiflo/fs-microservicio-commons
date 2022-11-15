@@ -37,9 +37,15 @@ public class CommonController<E, S extends ICommonService<E>> {
 		return ResponseEntity.ok(this.service.findAll());
 	}
 	
-	// Tenemos que enviar dos parámetros desde el frontend
-	// page: 0, 1, 2....etc (página actual)
-	// size: Tamaño de la paginación. Ejm. 5 por página, 10 por página, etc.
+	/**
+	 * Tenemos que enviar dos parámetros desde el frontend
+	 * page: 0, 1, 2....etc (página actual)
+	 * size: Tamaño de la paginación. Ejm. 5 por página, 10 por página, etc.
+	 * Estos parámetros (page y size), aquí en el backend, son pasados 
+	 * por debajo, al objeto pageable y vinen desde el frontend vía url, 
+	 * ejmp: 
+	 * http://localhost:8090/api/alumnos/pagina?page=0&size=7
+	 */
 	@GetMapping(path = "/pagina")
 	public ResponseEntity<?> listar(Pageable pageable) {
 		return ResponseEntity.ok(this.service.findAll(pageable));
