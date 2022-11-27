@@ -10,7 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +33,10 @@ import com.magadiflo.commons.services.ICommonService;
  * hacen peticiones desde un dominio que no hemos definido aquí, lanzará un
  * error, pues el domino será bloqueado por la política de CORS.
  */
-@CrossOrigin({ "http://localhost:4200" })
+
+// Lo comentamos porque usaremos la configuración que aplica de manera distribuida a todos los controladores.
+// Esa configuración que sería la Forma 02, está en el application.yml del fs-microservicio-spring-cloud-gateway
+//@CrossOrigin({ "http://localhost:4200" })
 public class CommonController<E, S extends ICommonService<E>> {
 
 	protected final S service;
