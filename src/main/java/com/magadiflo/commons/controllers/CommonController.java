@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.magadiflo.commons.exceptions.ExceptionHandling;
 import com.magadiflo.commons.services.ICommonService;
 
 /**
@@ -37,7 +38,7 @@ import com.magadiflo.commons.services.ICommonService;
 // Lo comentamos porque usaremos la configuración que aplica de manera distribuida a todos los controladores.
 // Esa configuración que sería la Forma 02, está en el application.yml del fs-microservicio-spring-cloud-gateway
 //@CrossOrigin({ "http://localhost:4200" })
-public class CommonController<E, S extends ICommonService<E>> {
+public class CommonController<E, S extends ICommonService<E>> extends ExceptionHandling {
 
 	protected final S service;
 
